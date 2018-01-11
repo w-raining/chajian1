@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<canvas width="300" height="300" id="myCanvas"></canvas>
+</body>
+</html>
+<script type="text/javascript">
+    var canvas=document.getElementById('myCanvas');
+    var context=canvas.getContext("2d");
+    //绘制图片
+    var img=new Image();
+    img.src="lan_teach.png";
+    img.onload=function(){
+        //context.drawImage(img,0,0);
+        //context.drawImage(img,0,0,100,100);
+        context.drawImage(img,180,160,100,100,0,0,100,100);
+        var imagedata=context.getImageData(0,0,100,100);
+        for (var i = 0, n = imagedata.data.length; i < n; i += 4) {
+            imagedata.data[i + 0] = 255 - imagedata.data[i + 0]; //red;
+            imagedata.data[i + 1] = 255 - imagedata.data[i + 1]; //green;
+            imagedata.data[i + 2] = 255 - imagedata.data[i + 2];
+        }
+        context.putImageData(imagedata,0,0);
+    }
+</script>
